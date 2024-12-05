@@ -1,5 +1,4 @@
 import os
-import re
 import uuid
 import streamlit as st
 from dotenv import load_dotenv  # Import dotenv to load environment variables
@@ -13,18 +12,6 @@ import chromadb
 
 # Load environment variables from the .env file
 load_dotenv()
-
-# Utility Functions
-def clean_text(text):
-    """Cleans raw text by removing HTML tags, URLs, special characters, and extra whitespace."""
-    text = re.sub(r'<[^>]*?>', '', text)
-    text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', text)
-    text = re.sub(r'[^a-zA-Z0-9 ]', '', text)
-    text = re.sub(r'\s{2,}', ' ', text)
-    text = text.strip()
-    text = ' '.join(text.split())
-    return text
-
 
 # Portfolio Management
 class Portfolio:
@@ -144,7 +131,7 @@ def create_streamlit_app(llm, portfolio):
     if submit_button:
         try:
             loader = WebBaseLoader([url_input])
-            data = clean_text(loader.load().pop().page_content)
+            data = loader.load().pop().page_content.strip()
             portfolio.load_portfolio()
             jobs = llm.extract_jobs(data)
             for job in jobs:  # for every job on the webpage, I am doing this
