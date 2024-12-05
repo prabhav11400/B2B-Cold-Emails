@@ -1,5 +1,5 @@
-streamlit
-langchain-community
-python-dotenv
-langchain-groq
-chromadb
+chromadb==0.6.0
+langchain==0.15.0
+dotenv==0.0.5
+streamlit==1.22.0
+other_package==1.2.3  # Replace with your actual dependencies
