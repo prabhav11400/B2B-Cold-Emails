@@ -1,7 +1,9 @@
 streamlit
-langchain-community
-langchain-groq
-langchain-core
+python-dotenv
+langchain_community
+langchain_groq
+langchain_core
 chromadb
-dotenv
-requests 
+os
+re
+uuid
